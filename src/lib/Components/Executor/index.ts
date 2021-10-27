@@ -11,11 +11,6 @@ import { MacOSResourceClass } from './MacOSExecutor.types';
 import { WindowsExecutor } from './WindowsExecutor';
 import { WindowsResourceClass } from './WindowsExecutor.types';
 
-/*
-  *Type '(args: Partial<DockerExecutor>) => DockerExecutor' is not assignable to type '(args: unknown) => 
-  AbstractExecutor'.
-  Types of parameters 'args' and 'args' are incompatible.
-    Type 'unknown' is not assignable to type 'Partial<DockerExecutor>'.*/
 type AnyResourceClass =
   | DockerResourceClass
   | MachineResourceClass
