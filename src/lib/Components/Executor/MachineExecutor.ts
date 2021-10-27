@@ -14,18 +14,18 @@ export class MachineExecutor extends AbstractExecutor {
    * @see - https://circleci.com/developer/machine
    */
   image = 'ubuntu-2004:202010-01';
-  resourceClass: MachineResourceClass;
-  constructor(resourceClass: MachineResourceClass = 'medium', image?: string) {
-    super(resourceClass);
+  resource_class: MachineResourceClass;
+  constructor(resource_class: MachineResourceClass = 'medium', image?: string) {
+    super(resource_class);
     this.image = image || this.image;
-    this.resourceClass = resourceClass;
+    this.resource_class = resource_class;
   }
   generate(): MachineExecutorSchema {
     return {
       machine: {
         image: this.image,
       },
-      resource_class: this.resourceClass,
+      resource_class: this.resource_class,
     };
   }
 }

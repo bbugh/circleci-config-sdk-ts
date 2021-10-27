@@ -26,12 +26,12 @@ export class DockerExecutor extends AbstractExecutor {
    * @param name - The name of this reusable executor.
    * @param image - The primary docker container image.
    */
-  resourceClass: DockerResourceClass;
-  constructor(image: string, resourceClass: DockerResourceClass = 'medium') {
-    super(resourceClass);
+  resource_class: DockerResourceClass;
+  constructor(image: string, resource_class: DockerResourceClass = 'medium') {
+    super(resource_class);
     const newImage = new DockerImage(image);
     this.image = newImage;
-    this.resourceClass = resourceClass;
+    this.resource_class = resource_class;
   }
   /**
    * Generate Docker Executor schema.
@@ -48,7 +48,7 @@ export class DockerExecutor extends AbstractExecutor {
     });
     return {
       docker: dockerImageMap,
-      resource_class: this.resourceClass,
+      resource_class: this.resource_class,
     };
   }
 }

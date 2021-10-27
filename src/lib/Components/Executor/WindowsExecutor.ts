@@ -15,11 +15,11 @@ export class WindowsExecutor extends AbstractExecutor {
    * @see - https://circleci.com/developer/machine
    */
   image = 'windows-server-2019-vs2019:stable';
-  resourceClass: WindowsResourceClass;
-  constructor(resourceClass: WindowsResourceClass = 'medium', image?: string) {
-    super(resourceClass);
+  resource_class: WindowsResourceClass;
+  constructor(resource_class: WindowsResourceClass = 'medium', image?: string) {
+    super(resource_class);
     this.image = image || this.image;
-    this.resourceClass = resourceClass;
+    this.resource_class = resource_class;
   }
   generate(): WindowsExecutorSchema {
     return {
@@ -27,7 +27,7 @@ export class WindowsExecutor extends AbstractExecutor {
         image: this.image,
       },
       resource_class:
-        `windows.${this.resourceClass}` as WindowsResourceClassGenerated,
+        `windows.${this.resource_class}` as WindowsResourceClassGenerated,
       shell: 'powershell.exe -ExecutionPolicy Bypass',
     };
   }

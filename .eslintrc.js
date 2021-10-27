@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     'tsdoc/syntax': 'warn',
     '@typescript-eslint/indent': 'off',
+    'security/detect-object-injection': 'off',
     'linebreak-style': ['error', 'unix'],
     'prettier/prettier': 'error',
   },

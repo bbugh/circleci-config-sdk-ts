@@ -6,11 +6,11 @@ import { ExecutorSchema } from './Executor.types';
  */
 export abstract class AbstractExecutor extends Component {
   description?: string;
-  resourceClass: string;
-  constructor(resourceClass: string, description?: string) {
+  resource_class: string;
+  constructor(resource_class: string, description?: string) {
     super();
     this.description = description;
-    this.resourceClass = resourceClass;
+    this.resource_class = resource_class;
   }
   abstract generate(): ExecutorSchema;
 }
