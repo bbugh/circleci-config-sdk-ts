@@ -15,24 +15,25 @@ import MachineExecutorSchema from '../Components/Executor/schemas/MachineExecuto
 import MacOSExecutorSchema from '../Components/Executor/schemas/MacosExecutor.schema';
 import ExecutorSchema from '../Components/Executor/schemas/ReusableExecutor.schema';
 import WindowsExecutorSchema from '../Components/Executor/schemas/WindowsExecutor.schema';
-import CommandParameterSchema from '../Components/Parameters/schemas/CommandParameter.schema';
+import CommandParametersSchema from '../Components/Parameters/schemas/CommandParameters.schema';
 import {
   CommandParameterListSchema,
   ExecutorParameterListSchema,
   JobParameterListSchema,
   PipelineParameterListSchema,
 } from '../Components/Parameters/schemas/ComponentParameterLists.schema';
-import ExecutorParameterSchema from '../Components/Parameters/schemas/ExecutorParameter.schema';
-import JobParameterSchema from '../Components/Parameters/schemas/JobParameter.schema';
+import ExecutorParametersSchema from '../Components/Parameters/schemas/ExecutorParameters.schema';
+import JobParametersSchema from '../Components/Parameters/schemas/JobParameters.schema';
 import {
   BooleanParameterSchema,
   EnumParameterSchema,
   EnvVarNameParameterSchema,
+  ExecutorParameterSchema,
   IntegerParameterSchema,
   StepsParameterSchema,
   StringParameterSchema,
 } from '../Components/Parameters/schemas/ParameterTypes.schema';
-import PipelineParameterSchema from '../Components/Parameters/schemas/PipelineParameter.schema';
+import PipelineParametersSchema from '../Components/Parameters/schemas/PipelineParameters.schema';
 import {
   GenerableSubtypes,
   GenerableType,
@@ -68,14 +69,15 @@ const schemaRegistry: ValidationMap = {
 
   [GenerableType.CUSTOM_PARAMETER]: {
     /* Custom Parameter Config Components */
-    [ParameterSubtype.JOB]: JobParameterSchema,
-    [ParameterSubtype.COMMAND]: CommandParameterSchema,
-    [ParameterSubtype.EXECUTOR]: ExecutorParameterSchema,
-    [ParameterSubtype.PIPELINE]: PipelineParameterSchema,
+    [ParameterSubtype.JOB_PARAMS]: JobParametersSchema,
+    [ParameterSubtype.COMMAND_PARAMS]: CommandParametersSchema,
+    [ParameterSubtype.EXECUTOR_PARAMS]: ExecutorParametersSchema,
+    [ParameterSubtype.PIPELINE_PARAMS]: PipelineParametersSchema,
     /** Custom Parameter Types */
     [ParameterSubtype.STRING]: StringParameterSchema,
     [ParameterSubtype.BOOLEAN]: BooleanParameterSchema,
     [ParameterSubtype.INTEGER]: IntegerParameterSchema,
+    [ParameterSubtype.EXECUTOR]: ExecutorParameterSchema,
     [ParameterSubtype.STEPS]: StepsParameterSchema,
     [ParameterSubtype.ENV_VAR_NAME]: EnvVarNameParameterSchema,
   },

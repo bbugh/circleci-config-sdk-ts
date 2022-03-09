@@ -41,7 +41,7 @@ describe('Parse yaml pipeline parameters and validate', () => {
     const result = ConfigValidator.validate(
       GenerableType.CUSTOM_PARAMETERS_LIST,
       parametersIn,
-      ParameterSubtype.PIPELINE,
+      ParametersListSubtype.PIPELINE,
     );
 
     expect(result).toEqual(true);
@@ -55,7 +55,7 @@ describe('Parse yaml pipeline parameters and validate', () => {
     const result = ConfigValidator.validate(
       GenerableType.CUSTOM_PARAMETER,
       parameterIn,
-      ParameterSubtype.PIPELINE,
+      ParameterSubtype.PIPELINE_PARAMS,
     );
 
     expect(result).toEqual(true);
@@ -82,10 +82,10 @@ describe('Parse yaml integer parameters and validate', () => {
 
   [
     ParameterSubtype.INTEGER,
-    ParameterSubtype.PIPELINE,
-    ParameterSubtype.JOB,
-    ParameterSubtype.COMMAND,
-    ParameterSubtype.EXECUTOR,
+    ParameterSubtype.PIPELINE_PARAMS,
+    ParameterSubtype.JOB_PARAMS,
+    ParameterSubtype.COMMAND_PARAMS,
+    ParameterSubtype.EXECUTOR_PARAMS,
   ].map((subtype) =>
     it(`Should parse integer parameter with subtype ${subtype}`, () => {
       expect(

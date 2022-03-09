@@ -1,7 +1,7 @@
 import { SchemaObject } from 'ajv';
 
-const CommandParameterSchema: SchemaObject = {
-  $id: '/parameters/CommandParameter',
+const CommandParametersSchema: SchemaObject = {
+  $id: '/parameters/CommandParameters',
   type: 'object',
   anyOf: [
     { $ref: '/parameters/EnumParameter' },
@@ -13,4 +13,4 @@ const CommandParameterSchema: SchemaObject = {
   ],
 };
 
-export default CommandParameterSchema;
+export default CommandParametersSchema;

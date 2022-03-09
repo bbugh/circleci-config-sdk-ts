@@ -30,15 +30,16 @@ export enum GenerableType {
 }
 
 export enum ParameterSubtype {
-  JOB = 'job',
-  COMMAND = 'command',
-  EXECUTOR = 'executor',
-  PIPELINE = 'pipeline',
+  JOB_PARAMS = 'job_params',
+  COMMAND_PARAMS = 'command_params',
+  EXECUTOR_PARAMS = 'executor_params',
+  PIPELINE_PARAMS = 'pipeline_params',
 
   STRING = 'string',
   BOOLEAN = 'boolean',
   INTEGER = 'integer',
   STEPS = 'steps',
+  EXECUTOR = 'executor',
   ENV_VAR_NAME = 'env_var_name',
 }
 
