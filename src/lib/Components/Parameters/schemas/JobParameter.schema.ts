@@ -9,7 +9,7 @@ const JobParameterSchema: SchemaObject = {
     { $ref: '/parameters/IntegerParameter' },
     { $ref: '/parameters/BooleanParameter' },
     { $ref: '/parameters/StepsParameter' },
-    { $ref: '/executors/Executor' },
+    { $ref: '/parameters/ExecutorParameter' },
   ],
 };
 

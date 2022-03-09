@@ -3,7 +3,7 @@ import { SchemaObject } from 'ajv';
 const CommandParameterSchema: SchemaObject = {
   $id: '/parameters/CommandParameter',
   type: 'object',
-  oneOf: [
+  anyOf: [
     { $ref: '/parameters/EnumParameter' },
     { $ref: '/parameters/StringParameter' },
     { $ref: '/parameters/IntegerParameter' },
