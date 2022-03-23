@@ -73,7 +73,7 @@ const schemaRegistry: ValidationMap = {
   [GenerableType.WINDOWS_EXECUTOR]: WindowsExecutorSchema,
   [GenerableType.REUSABLE_EXECUTOR]: ReusableExecutorSchema,
 
-  [GenerableType.STEP]: StepsSchema,
+  [GenerableType.STEPS]: StepsSchema,
   [GenerableType.JOB]: {},
   [GenerableType.WORKFLOW_JOB]: {},
 
@@ -139,7 +139,6 @@ export class ConfigValidator extends Ajv {
         const schemaGroup: SchemaObject = {
           $id: `/custom/${generableType}`,
           type: 'object',
-          additionalProperties: false,
           properties: {},
         };
 
@@ -169,13 +168,10 @@ export class ConfigValidator extends Ajv {
                 schemaGroup.properties[generable.name] = {
                   $ref: schema.$id,
                 };
-                console.log(schema);
               }
             }
           });
         }
-
-        console.log(schemaGroup);
 
         this.addSchema(schemaGroup, schemaGroup.$id);
       });

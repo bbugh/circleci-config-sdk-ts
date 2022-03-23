@@ -352,49 +352,80 @@ describe('Instantiate reusable commands', () => {
   const validator = myConfig.getValidator();
 
   it('Should validate with the proper parameters', () => {
-    const result = validator.validateGenerable(GenerableType.STEP, {
-      search_year: {
-        year: 2022,
-        type: 'solar',
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_year: {
+          year: 2022,
+          type: 'solar',
+        },
+        point_direction: {
+          axis: 'x',
+        },
+        run: {
+          command: 'echo "Hello, World!"',
+        },
       },
-    });
+    ]);
     expect(result).toEqual(true);
   });
 
-  it('Should not validate without the required parameter', () => {
-    const result = validator.validateGenerable(GenerableType.STEP, {
-      search_year: {
-        type: 'solar',
+  it('Should not validate with an incorrect enum value', () => {
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_year: {
+          year: 2022,
+          type: 'solar',
+        },
+        point_direction: {
+          axis: 'w',
+        },
       },
-    });
+    ]);
+    expect(result).not.toEqual(true);
+  });
+
+  it('Should not validate without the required parameter', () => {
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_year: {
+          type: 'solar',
+        },
+      },
+    ]);
     expect(result).not.toEqual(true);
   });
 
   it('Should not validate with an improper command', () => {
-    const result = validator.validateGenerable(GenerableType.STEP, {
-      search_day: {
-        year: 2022,
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_day: {
+          year: 2022,
+        },
       },
-    });
+    ]);
     expect(result).not.toEqual(true);
   });
 
   it('Should not validate with an improper parameter type', () => {
-    const result = validator.validateGenerable(GenerableType.STEP, {
-      search_year: {
-        year: '2022',
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_year: {
+          year: '2022',
+        },
       },
-    });
+    ]);
     expect(result).not.toEqual(true);
   });
 
   it('Should not validate with an improper parameter', () => {
-    const result = validator.validateGenerable(GenerableType.STEP, {
-      search_year: {
-        day: 232,
-        year: 2022,
+    const result = validator.validateGenerable(GenerableType.STEPS, [
+      {
+        search_year: {
+          day: 232,
+          year: 2022,
+        },
       },
-    });
+    ]);
     expect(result).not.toEqual(true);
   });
 });
