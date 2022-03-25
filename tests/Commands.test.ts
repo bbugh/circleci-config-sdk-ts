@@ -352,15 +352,19 @@ describe('Instantiate reusable commands', () => {
   const validator = myConfig.getValidator();
 
   it('Should validate with the proper parameters', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
         search_year: {
           year: 2022,
           type: 'solar',
         },
+      },
+      {
         point_direction: {
           axis: 'x',
         },
+      },
+      {
         run: {
           command: 'echo "Hello, World!"',
         },
@@ -369,8 +373,23 @@ describe('Instantiate reusable commands', () => {
     expect(result).toEqual(true);
   });
 
+  it('Should not validate with malformed list', () => {
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
+      {
+        search_year: {
+          year: 2022,
+          type: 'solar',
+        },
+        point_direction: {
+          axis: 'x',
+        },
+      },
+    ]);
+    expect(result).not.toEqual(true);
+  });
+
   it('Should not validate with an incorrect enum value', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
         search_year: {
           year: 2022,
@@ -385,7 +404,7 @@ describe('Instantiate reusable commands', () => {
   });
 
   it('Should not validate without the required parameter', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
         search_year: {
           type: 'solar',
@@ -396,9 +415,9 @@ describe('Instantiate reusable commands', () => {
   });
 
   it('Should not validate with an improper command', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
-        search_day: {
+        search_yaer: {
           year: 2022,
         },
       },
@@ -407,7 +426,7 @@ describe('Instantiate reusable commands', () => {
   });
 
   it('Should not validate with an improper parameter type', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
         search_year: {
           year: '2022',
@@ -418,7 +437,7 @@ describe('Instantiate reusable commands', () => {
   });
 
   it('Should not validate with an improper parameter', () => {
-    const result = validator.validateGenerable(GenerableType.STEPS, [
+    const result = validator.validateGenerable(GenerableType.STEP_LIST, [
       {
         search_year: {
           day: 232,

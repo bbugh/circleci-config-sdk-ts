@@ -14,7 +14,8 @@ export enum GenerableType {
   STORE_ARTIFACTS = 'store_artifacts',
   STORE_TEST_RESULTS = 'store_test_results',
 
-  STEPS = 'steps',
+  STEP = 'step',
+  STEP_LIST = 'steps',
   JOB = 'job',
   WORKFLOW_JOB = 'workflow_job',
 

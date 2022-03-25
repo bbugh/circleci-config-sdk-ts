@@ -12,7 +12,10 @@ import StoreTestResultsSchema from '../Components/Commands/schema/Native/StoreTe
 import AttachWorkspaceSchema from '../Components/Commands/schema/Native/Workspace/Attach.schema';
 import PersistSchema from '../Components/Commands/schema/Native/Workspace/Persist.schema';
 import CustomCommandSchema from '../Components/Commands/schema/Reusable/CustomCommand.schema';
-import StepsSchema from '../Components/Commands/schema/Steps.schema';
+import {
+  StepSchema,
+  StepsSchema,
+} from '../Components/Commands/schema/Steps.schema';
 import DockerExecutorSchema from '../Components/Executor/schemas/DockerExecutor.schema';
 import ExecutorSchema from '../Components/Executor/schemas/Executor.schema';
 import MachineExecutorSchema from '../Components/Executor/schemas/MachineExecutor.schema';
@@ -51,6 +54,7 @@ import {
   ValidationMap,
   ValidationResult,
 } from './types/Config.types';
+import ajvMergePatch from 'ajv-merge-patch';
 
 const schemaRegistry: ValidationMap = {
   [GenerableType.REUSABLE_COMMAND]: {},
@@ -73,7 +77,8 @@ const schemaRegistry: ValidationMap = {
   [GenerableType.WINDOWS_EXECUTOR]: WindowsExecutorSchema,
   [GenerableType.REUSABLE_EXECUTOR]: ReusableExecutorSchema,
 
-  [GenerableType.STEPS]: StepsSchema,
+  [GenerableType.STEP]: StepSchema,
+  [GenerableType.STEP_LIST]: StepsSchema,
   [GenerableType.JOB]: {},
   [GenerableType.WORKFLOW_JOB]: {},
 
@@ -110,6 +115,8 @@ export class ConfigValidator extends Ajv {
   constructor(config?: Config) {
     super();
 
+    ajvMergePatch(this);
+
     Object.values(schemaRegistry).forEach((source) => {
       if ('$id' in source) {
         const schema = source as SchemaObject;
@@ -139,6 +146,9 @@ export class ConfigValidator extends Ajv {
         const schemaGroup: SchemaObject = {
           $id: `/custom/${generableType}`,
           type: 'object',
+          minProperties: 1,
+          maxProperties: 1,
+          additionalProperties: false,
           properties: {},
         };
 
@@ -168,10 +178,13 @@ export class ConfigValidator extends Ajv {
                 schemaGroup.properties[generable.name] = {
                   $ref: schema.$id,
                 };
+                console.log(schema);
               }
             }
           });
         }
+
+        console.log(schemaGroup);
 
         this.addSchema(schemaGroup, schemaGroup.$id);
       });
